@@ -15,7 +15,8 @@ import {Component, Input, AfterViewInit, ElementRef, ChangeDetectorRef} from "@a
         {{ content }}
     </div> 
 </div>
-`
+`,
+    styleUrls: ["./tooltip.css"]
 })
 export class TooltipContent implements AfterViewInit {
 
