@@ -1,7 +1,7 @@
-import {Component, Input, AfterViewInit, ElementRef, ChangeDetectorRef} from "@angular/core";
+import { Component, Input, AfterViewInit, ElementRef, ChangeDetectorRef } from '@angular/core';
 
 @Component({
-    selector: "tooltip-content",
+    selector: 'tooltip-content',
     template: `
 <div class="tooltip {{ placement }}"
      [style.top]="top + 'px'"
@@ -16,7 +16,7 @@ import {Component, Input, AfterViewInit, ElementRef, ChangeDetectorRef} from "@a
     </div> 
 </div>
 `,
-    styleUrls: ["./tooltip.css"]
+    styleUrls: ['./tooltip.css']
 })
 export class TooltipContent implements AfterViewInit {
 
@@ -31,7 +31,7 @@ export class TooltipContent implements AfterViewInit {
     content: string;
 
     @Input()
-    placement: "top"|"bottom"|"left"|"right" = "bottom";
+    placement: 'top'|'bottom'|'left'|'right' = 'bottom';
 
     @Input()
     animation: boolean = true;
@@ -91,9 +91,9 @@ export class TooltipContent implements AfterViewInit {
     // -------------------------------------------------------------------------
 
     private positionElements(hostEl: HTMLElement, targetEl: HTMLElement, positionStr: string, appendToBody: boolean = false): { top: number, left: number } {
-        let positionStrParts = positionStr.split("-");
+        let positionStrParts = positionStr.split('-');
         let pos0 = positionStrParts[0];
-        let pos1 = positionStrParts[1] || "center";
+        let pos1 = positionStrParts[1] || 'center';
         let hostElPos = appendToBody ? this.offset(hostEl) : this.position(hostEl);
         let targetElWidth = targetEl.offsetWidth;
         let targetElHeight = targetEl.offsetHeight;
@@ -123,21 +123,21 @@ export class TooltipContent implements AfterViewInit {
 
         let targetElPos: { top: number, left: number };
         switch (pos0) {
-            case "right":
+            case 'right':
                 targetElPos = {
                     top: shiftHeight[pos1](),
                     left: shiftWidth[pos0]()
                 };
                 break;
             
-            case "left":
+            case 'left':
                 targetElPos = {
                     top: shiftHeight[pos1](),
                     left: hostElPos.left - targetElWidth
                 };
                 break;
             
-            case "bottom":
+            case 'bottom':
                 targetElPos = {
                     top: shiftHeight[pos0](),
                     left: shiftWidth[pos1]()
@@ -196,7 +196,7 @@ export class TooltipContent implements AfterViewInit {
     }
 
     private isStaticPositioned(nativeEl: HTMLElement): boolean {
-        return (this.getStyle(nativeEl, "position") || "static" ) === "static";
+        return (this.getStyle(nativeEl, 'position') || 'static' ) === 'static';
     }
 
     private parentOffsetEl(nativeEl: HTMLElement): any {
