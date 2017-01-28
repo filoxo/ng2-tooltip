@@ -35,7 +35,7 @@ export class Tooltip {
     // -------------------------------------------------------------------------
 
     @Input("tooltip")
-    content: string|TooltipContent;
+    content: string | TooltipContent;
 
     @Input()
     tooltipDisabled: boolean;
