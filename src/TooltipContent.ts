@@ -87,63 +87,60 @@ export class TooltipContent implements AfterViewInit {
     // -------------------------------------------------------------------------
 
     private positionElements(hostEl: HTMLElement, targetEl: HTMLElement, positionStr: string, appendToBody: boolean = false): { top: number, left: number } {
-        let positionStrParts = positionStr.split('-');
-        let pos0 = positionStrParts[0];
-        let pos1 = positionStrParts[1] || 'center';
-        let hostElPos = appendToBody ? this.offset(hostEl) : this.position(hostEl);
-        let targetElWidth = targetEl.offsetWidth;
-        let targetElHeight = targetEl.offsetHeight;
-        let shiftWidth: any = {
+        const [ position, alignment = 'center' ] = positionStr.split('-');
+        const { left, width, top, height } = appendToBody ? this.offset(hostEl) : this.position(hostEl);
+        const { offsetWidth, offsetHeight } = targetEl;
+        const shiftWidth: any = {
             center: function (): number {
-                return hostElPos.left + hostElPos.width / 2 - targetElWidth / 2;
+                return left + width / 2 - offsetWidth / 2;
             },
             left: function (): number {
-                return hostElPos.left;
+                return left;
             },
             right: function (): number {
-                return hostElPos.left + hostElPos.width;
+                return left + width;
             }
         };
 
         let shiftHeight: any = {
             center: function (): number {
-                return hostElPos.top + hostElPos.height / 2 - targetElHeight / 2;
+                return top + height / 2 - offsetHeight / 2;
             },
             top: function (): number {
-                return hostElPos.top;
+                return top;
             },
             bottom: function (): number {
-                return hostElPos.top + hostElPos.height;
+                return top + height;
             }
         };
 
         let targetElPos: { top: number, left: number };
-        switch (pos0) {
+        switch (position) {
             case 'right':
                 targetElPos = {
-                    top: shiftHeight[pos1](),
-                    left: shiftWidth[pos0]()
+                    top: shiftHeight[alignment](),
+                    left: shiftWidth[position]()
                 };
                 break;
             
             case 'left':
                 targetElPos = {
-                    top: shiftHeight[pos1](),
-                    left: hostElPos.left - targetElWidth
+                    top: shiftHeight[alignment](),
+                    left: left - offsetWidth
                 };
                 break;
             
             case 'bottom':
                 targetElPos = {
-                    top: shiftHeight[pos0](),
-                    left: shiftWidth[pos1]()
+                    top: shiftHeight[position](),
+                    left: shiftWidth[alignment]()
                 };
                 break;
             
             default:
                 targetElPos = {
-                    top: hostElPos.top - targetElHeight,
-                    left: shiftWidth[pos1]()
+                    top: top - offsetHeight,
+                    left: shiftWidth[alignment]()
                 };
                 break;
         }
