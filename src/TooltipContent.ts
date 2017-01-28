@@ -1,6 +1,7 @@
 import { Component, Input, AfterViewInit, ElementRef, ChangeDetectorRef } from '@angular/core';
 
 export type TooltipPosition = 'top' | 'bottom' | 'left' | 'right';
+export type AnchorPoint = { top: number, left: number };
 
 @Component({
     selector: 'tooltip-content',
@@ -86,7 +87,7 @@ export class TooltipContent implements AfterViewInit {
     // Private Methods
     // -------------------------------------------------------------------------
 
-    private positionElements(hostEl: HTMLElement, targetEl: HTMLElement, positionStr: string, appendToBody: boolean = false): { top: number, left: number } {
+    private positionElements(hostEl: HTMLElement, targetEl: HTMLElement, positionStr: string, appendToBody: boolean = false): AnchorPoint {
         const [ position, alignment = 'center' ] = positionStr.split('-');
         const { left, width, top, height } = appendToBody ? this.offset(hostEl) : this.position(hostEl);
         const { offsetWidth, offsetHeight } = targetEl;
@@ -102,38 +103,28 @@ export class TooltipContent implements AfterViewInit {
             bottom: () => top + height
         };
 
-        let targetElPos: { top: number, left: number };
         switch (position) {
             case 'right':
-                targetElPos = {
+                return {
                     top: shiftHeight[alignment](),
                     left: shiftWidth[position]()
                 };
-                break;
-            
             case 'left':
-                targetElPos = {
+                return {
                     top: shiftHeight[alignment](),
                     left: left - offsetWidth
                 };
-                break;
-            
             case 'bottom':
-                targetElPos = {
+                return {
                     top: shiftHeight[position](),
                     left: shiftWidth[alignment]()
                 };
-                break;
-            
             default:
-                targetElPos = {
+                return {
                     top: top - offsetHeight,
                     left: shiftWidth[alignment]()
                 };
-                break;
         }
-
-        return targetElPos;
     }
 
     private position(nativeEl: HTMLElement): { width: number, height: number, top: number, left: number } {
