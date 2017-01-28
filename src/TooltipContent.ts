@@ -1,5 +1,7 @@
 import { Component, Input, AfterViewInit, ElementRef, ChangeDetectorRef } from '@angular/core';
 
+export type TooltipPosition = 'top' | 'bottom' | 'left' | 'right';
+
 @Component({
     selector: 'tooltip-content',
     template: `
@@ -8,6 +10,7 @@ import { Component, Input, AfterViewInit, ElementRef, ChangeDetectorRef } from '
      [style.left]="left + 'px'"
      [class.in]="isIn"
      [class.fade]="isFade"
+     [attr.aria-expanded]="isFade"
      role="tooltip">
     <div class="tooltip-arrow"></div> 
     <div class="tooltip-inner">
@@ -24,17 +27,10 @@ export class TooltipContent implements AfterViewInit {
     // Inputs / Outputs 
     // -------------------------------------------------------------------------
 
-    @Input()
-    hostElement: HTMLElement;
-
-    @Input()
-    content: string;
-
-    @Input()
-    placement: 'top'|'bottom'|'left'|'right' = 'bottom';
-
-    @Input()
-    animation: boolean = true;
+    @Input() hostElement: HTMLElement;
+    @Input() content: string;
+    @Input() placement: TooltipPosition = 'bottom';
+    @Input() animation: boolean = true;
 
     // -------------------------------------------------------------------------
     // Properties
