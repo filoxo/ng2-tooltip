@@ -91,27 +91,15 @@ export class TooltipContent implements AfterViewInit {
         const { left, width, top, height } = appendToBody ? this.offset(hostEl) : this.position(hostEl);
         const { offsetWidth, offsetHeight } = targetEl;
         const shiftWidth: any = {
-            center: function (): number {
-                return left + width / 2 - offsetWidth / 2;
-            },
-            left: function (): number {
-                return left;
-            },
-            right: function (): number {
-                return left + width;
-            }
+            center: () => left + width / 2 - offsetWidth / 2,
+            left: () => left,
+            right: () => left + width
         };
 
         let shiftHeight: any = {
-            center: function (): number {
-                return top + height / 2 - offsetHeight / 2;
-            },
-            top: function (): number {
-                return top;
-            },
-            bottom: function (): number {
-                return top + height;
-            }
+            center: () => top + height / 2 - offsetHeight / 2,
+            top: () => top,
+            bottom: () => top + height
         };
 
         let targetElPos: { top: number, left: number };
