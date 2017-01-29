@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Tooltip } from './Tooltip';
-import { TooltipContent } from './TooltipContent';
+import { Tooltip } from './tooltip.directive';
+import { TooltipContent } from './tooltip-content.component';
 
-export * from './Tooltip';
-export * from './TooltipContent';
+export * from './tooltip.directive';
+export * from './tooltip-content.component';
 
 @NgModule({
     imports: [ CommonModule ],
