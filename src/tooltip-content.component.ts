@@ -32,16 +32,16 @@ export class TooltipContent implements AfterViewInit {
     @Input() hostElement: HTMLElement;
     @Input() content: string;
     @Input() placement: TooltipPosition = 'bottom';
-    @Input() animation: boolean = true;
+    @Input() animation = true;
 
     // -------------------------------------------------------------------------
     // Properties
     // -------------------------------------------------------------------------
 
-    top: number = -100000;
-    left: number = -100000;
-    isIn: boolean = false;
-    isFade: boolean = false;
+    top = -100000;
+    left = -100000;
+    isIn = false;
+    isFade = false;
 
     // -------------------------------------------------------------------------
     // Constructor
@@ -68,9 +68,9 @@ export class TooltipContent implements AfterViewInit {
         if (!this.hostElement)
             return;
 
-        const p = this.positionElements(this.hostElement, this.element.nativeElement.children[0], this.placement);
-        this.top = p.top;
-        this.left = p.left;
+        const { top, left } = this.positionElements(this.hostElement, this.element.nativeElement.children[0], this.placement);
+        this.top = top;
+        this.left = left;
         this.isIn = true;
         if (this.animation)
             this.isFade = true;
@@ -149,9 +149,10 @@ export class TooltipContent implements AfterViewInit {
 
     private offset(nativeEl:any): PositionRect {
         const { width, height, top, left } = nativeEl.getBoundingClientRect();
+        const { offsetWidth, offsetHeight } = nativeEl;
         return {
-            width: width || nativeEl.offsetWidth,
-            height: height || nativeEl.offsetHeight,
+            width: width || offsetWidth,
+            height: height || offsetHeight,
             top: top + (window.pageYOffset || window.document.documentElement.scrollTop),
             left: left + (window.pageXOffset || window.document.documentElement.scrollLeft)
         };
