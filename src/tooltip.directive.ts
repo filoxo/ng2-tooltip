@@ -8,7 +8,7 @@ import {
     ComponentFactory
 } from "@angular/core";
 
-import { TooltipContent } from "./TooltipContent";
+import { TooltipContent } from "./tooltip-content.component";
 
 @Directive({
     selector: "[tooltip]"
