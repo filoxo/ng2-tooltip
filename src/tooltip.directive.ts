@@ -6,15 +6,24 @@ import {
     Input, 
     ComponentFactoryResolver,
     ComponentFactory
-} from "@angular/core";
+} from '@angular/core';
 
-import { TooltipContent } from "./tooltip-content.component";
+import { TooltipContent, TooltipPosition } from './tooltip-content.component';
 
 @Directive({
-    selector: "[tooltip]"
+    selector: '[tooltip]'
 })
 export class Tooltip {
 
+    // -------------------------------------------------------------------------
+    // Inputs / Outputs
+    // -------------------------------------------------------------------------
+
+    @Input('tooltip') content: string | TooltipContent;
+    @Input() tooltipDisabled: boolean;
+    @Input() tooltipAnimation: boolean = true;
+    @Input() tooltipPlacement: TooltipPosition = 'bottom';
+    
     // -------------------------------------------------------------------------
     // Properties
     // -------------------------------------------------------------------------
@@ -31,33 +40,17 @@ export class Tooltip {
     }
 
     // -------------------------------------------------------------------------
-    // Inputs / Outputs
-    // -------------------------------------------------------------------------
-
-    @Input("tooltip")
-    content: string | TooltipContent;
-
-    @Input()
-    tooltipDisabled: boolean;
-
-    @Input()
-    tooltipAnimation: boolean = true;
-
-    @Input()
-    tooltipPlacement: "top"|"bottom"|"left"|"right" = "bottom";
-
-    // -------------------------------------------------------------------------
     // Public Methods
     // -------------------------------------------------------------------------
 
-    @HostListener("focusin")
-    @HostListener("mouseenter")
+    @HostListener('focusin')
+    @HostListener('mouseenter')
     show(): void {
         if (this.tooltipDisabled || this.visible)
             return;
 
         this.visible = true;
-        if (typeof this.content === "string") {
+        if (typeof this.content === 'string') {
             const factory = this.resolver.resolveComponentFactory(TooltipContent);
             if (!this.visible)
                 return;
@@ -76,8 +69,8 @@ export class Tooltip {
         }
     }
 
-    @HostListener("focusout")
-    @HostListener("mouseleave")
+    @HostListener('focusout')
+    @HostListener('mouseleave')
     hide(): void {
         if (!this.visible)
             return;
