@@ -2,6 +2,7 @@ import { Component, Input, AfterViewInit, ElementRef, ChangeDetectorRef } from '
 
 export type TooltipPosition = 'top' | 'bottom' | 'left' | 'right';
 export type AnchorPoint = { top: number, left: number };
+export type PositionRect = { width: number, height: number, top: number, left: number };
 
 @Component({
     selector: 'tooltip-content',
@@ -127,8 +128,8 @@ export class TooltipContent implements AfterViewInit {
         }
     }
 
-    private position(nativeEl: HTMLElement): { width: number, height: number, top: number, left: number } {
-        let offsetParentBCR = { top: 0, left: 0 };
+    private position(nativeEl: HTMLElement): PositionRect {
+        let offsetParentBCR: AnchorPoint = { top: 0, left: 0 };
         const elBCR = this.offset(nativeEl);
         const offsetParentEl = this.parentOffsetEl(nativeEl);
         if (offsetParentEl !== window.document) {
@@ -146,13 +147,13 @@ export class TooltipContent implements AfterViewInit {
         };
     }
 
-    private offset(nativeEl:any): { width: number, height: number, top: number, left: number } {
-        const boundingClientRect = nativeEl.getBoundingClientRect();
+    private offset(nativeEl:any): PositionRect {
+        const { width, height, top, left } = nativeEl.getBoundingClientRect();
         return {
-            width: boundingClientRect.width || nativeEl.offsetWidth,
-            height: boundingClientRect.height || nativeEl.offsetHeight,
-            top: boundingClientRect.top + (window.pageYOffset || window.document.documentElement.scrollTop),
-            left: boundingClientRect.left + (window.pageXOffset || window.document.documentElement.scrollLeft)
+            width: width || nativeEl.offsetWidth,
+            height: height || nativeEl.offsetHeight,
+            top: top + (window.pageYOffset || window.document.documentElement.scrollTop),
+            left: left + (window.pageXOffset || window.document.documentElement.scrollLeft)
         };
     }
 
