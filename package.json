@@ -23,9 +23,11 @@
     "angular2-tooltip"
   ],
   "scripts": {
-    "rimraf": "rimraf",
     "build": "rimraf dist && ngc -p tsconfig.json",
-    "build:prod": "rimraf dist && ngc -p tsconfig-aot.json"
+    "build:prod": "rimraf dist && ngc -p tsconfig-aot.json",
+    "lint": "tslint ./src/**/*.ts",
+    "rimraf": "rimraf",
+    "tslint": "tslint"
   },
   "peerDependencies": {
     "@angular/core": "^2.0.0"
