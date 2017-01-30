@@ -1,9 +1,9 @@
 import {
-    Directive, 
-    HostListener, 
-    ComponentRef, 
-    ViewContainerRef, 
-    Input, 
+    Directive,
+    HostListener,
+    ComponentRef,
+    ViewContainerRef,
+    Input,
     ComponentFactoryResolver,
     ComponentFactory
 } from '@angular/core';
@@ -23,7 +23,7 @@ export class Tooltip {
     @Input() tooltipDisabled: boolean;
     @Input() tooltipAnimation: boolean = true;
     @Input() tooltipPlacement: TooltipPosition = 'bottom';
-    
+
     // -------------------------------------------------------------------------
     // Properties
     // -------------------------------------------------------------------------

@@ -63,7 +63,7 @@ export class TooltipContent implements AfterViewInit {
     // -------------------------------------------------------------------------
     // Public Methods
     // -------------------------------------------------------------------------
-    
+
     show(): void {
         if (!this.hostElement)
             return;
@@ -147,7 +147,7 @@ export class TooltipContent implements AfterViewInit {
         };
     }
 
-    private offset(nativeEl:any): PositionRect {
+    private offset(nativeEl: any): PositionRect {
         const { width, height, top, left } = nativeEl.getBoundingClientRect();
         const { offsetWidth, offsetHeight } = nativeEl;
         return {
@@ -164,7 +164,7 @@ export class TooltipContent implements AfterViewInit {
 
         if (window.getComputedStyle)
             return (window.getComputedStyle(nativeEl) as any)[cssProp];
-        
+
         // finally try and get inline style
         return (nativeEl.style as any)[cssProp];
     }
