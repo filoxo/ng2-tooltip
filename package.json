@@ -22,6 +22,11 @@
     "typescript",
     "angular2-tooltip"
   ],
+  "scripts": {
+    "rimraf": "rimraf",
+    "build": "rimraf dist && ngc -p tsconfig.json",
+    "build:prod": "rimraf dist && ngc -p tsconfig-aot.json"
+  },
   "peerDependencies": {
     "@angular/core": "^2.0.0"
   },
@@ -50,6 +55,7 @@
     "gulpclass": "^0.1.1",
     "mocha": "^3.2.0",
     "reflect-metadata": "0.1.9",
+    "rimraf": "^2.5.4",
     "rxjs": "^5.0.3",
     "sinon": "^1.17.7",
     "sinon-chai": "^2.8.0",
@@ -57,6 +63,7 @@
     "tslint": "^4.3.1",
     "tslint-stylish": "^2.1.0-beta",
     "typescript": "^2.1.5",
+    "webpack": "^2.2.0",
     "zone.js": "^0.7.6"
   }
 }
